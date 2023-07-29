@@ -2,10 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-image: url("Images/dark mountains.jpg");
 }
-body{
+.gameFrame{
     width: 100vw;
-    height: 100vh;
+    height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,3 +17,11 @@ body{
     border: 4px solid black;
     background: linear-gradient(to bottom, lightblue, #5d5ddd, #1919e1);
 }
+.controllers{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
