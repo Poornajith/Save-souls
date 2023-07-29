@@ -27,10 +27,8 @@ canvas.addEventListener('mouseup', function () {
 })
 
 //player
-const playerLeft = new Image();
-playerLeft.src = 'fish_swim_left.png';
-const playerRight = new Image();
-playerRight.src = 'fish_swim_right.png';
+const playerImage = new Image();
+playerImage.src = 'pimon_flying.png';
 
 class Player {
     constructor() {
@@ -38,24 +36,12 @@ class Player {
         this.y = canvas.height;
         this.radious = 50;
         this.angle = 0;
+        this.frame = 0;
         this.frameX = 0;
         this.frameY = 0;
-        this.spriteWidth = 498;
-        this.spriteHeight = 327;
+        this.spriteWidth = 1985/5;
+        this.spriteHeight = 2325/5;
     }
-
-    update() {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        this.angle = Math.atan2(dy, dx);
-        if (mouse.x !== this.x) {
-            this.x -= dx / 15;
-        }
-        if (mouse.y !== this.y) {
-            this.y -= dy / 15;
-        }
-    }
-
     draw() {
         if (mouse.click) {
             ctx.lineWidth = 0.2;
@@ -66,25 +52,43 @@ class Player {
         }
         // player collision area visibility
 
-      /*  ctx.fillStyle = 'red';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radious, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.closePath();
-        ctx.fillRect(this.x, this.y, this.radious, 10); */
+        // ctx.fillStyle = 'red';
+        // ctx.beginPath();
+        // ctx.arc(this.x, this.y, this.radious, 0, Math.PI * 2);
+        // ctx.fill();
+        // ctx.closePath();
+        // ctx.fillRect(this.x, this.y, this.radious, 10);
 
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-
-        if (this.x >= mouse.x) {
-            ctx.drawImage(playerLeft, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 0 - 60, 0 - 40, this.spriteWidth / 4, this.spriteHeight / 4);
-        } else {
-            ctx.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 0 - 60, 0 - 40, this.spriteWidth / 4, this.spriteHeight / 4);
-        }
-        ctx.restore();
-
+        ctx.drawImage(playerImage, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 60, this.y - 70, this.spriteWidth / 3, this.spriteHeight / 3);
     }
+    update() {
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        this.angle = Math.atan2(dy, dx);
+        if (mouse.x !== this.x) {
+            this.x -= dx / 15;
+        }
+        if (mouse.y !== this.y) {
+            this.y -= dy / 15;
+        }
+        if (gameFrame % 5 === 0){
+            this.frame++;
+            if (this.frame >= 25) this.frame = 0;
+            if (this.frame === 4 || this.frame === 9 || this.frame === 14 || this.frame === 19 || this.frame === 24){
+                this.frameX = 0;
+            } else {
+                this.frameX++;
+            }
+            if ( this.frame < 4) this.frameY = 0;
+            else if ( this.frame < 9) this.frameY = 1;
+            else if ( this.frame < 14) this.frameY = 2;
+            else if ( this.frame < 19) this.frameY = 3;
+            else if ( this.frame < 24) this.frameY = 4;
+            else this.frameY = 0;
+        }
+        console.log( "sprite frame : " + this.frame + " FrameX : " + this.frameX + " FrameY : " + this.frameY + " game frame : "+ gameFrame);
+    }
+
 }
 
 const player = new Player();
@@ -251,7 +255,8 @@ function animate() {
     ctx.fillStyle = 'black';
     ctx.fillText('score: ' + score, 10, 50);
     gameFrame++;
-    if (!gameOver) requestAnimationFrame(animate);
+  //  if (!gameOver) requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 }
 
 animate();
