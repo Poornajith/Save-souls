@@ -7,15 +7,38 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<h1 class="text-center text-white p-2">Soul Saver</h1>
 <div class="gameFrame">
     <canvas id="canvas1"></canvas>
 </div>
 <div class="controllers">
     <button class="btn btn-primary m-2 text-white" id="startGame"> Start</button>
-    <button class="btn btn-info m-2 text-white" id="dLevel1"> Difficulty 1</button>
-    <button class="btn m-2 text-white" id="dLevel2"> Difficulty 2</button>
-    <button class="btn m-2 text-white" id="dLevel3"> Difficulty 3</button>
+    <button class="btn btn-info m-2 text-gray" id="dLevel1"> Difficulty 1</button>
+    <button class="btn m-2 text-gray" id="dLevel2"> Difficulty 2</button>
+    <button class="btn m-2 text-gray" id="dLevel3"> Difficulty 3</button>
+</div>
+<div class="score">
+    <h2 class="text-white text-center" id="score">High Score : <span id="scoreValue">10</span></h2>
 </div>
 <script src="script.js"></script>
+<script>
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "firebase/app";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyD85-WnFJZxyltW1yOvPKpmFZu4lvIhMlU",
+        authDomain: "soul-saver-7e285.firebaseapp.com",
+        projectId: "soul-saver-7e285",
+        storageBucket: "soul-saver-7e285.appspot.com",
+        messagingSenderId: "68750093834",
+        appId: "1:68750093834:web:f0e08d3930ab6e6109b9f3"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+</script>
 </body>
 </html>

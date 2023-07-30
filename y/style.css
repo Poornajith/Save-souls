@@ -2,7 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+}
+body{
     background-image: url("Images/dark mountains.jpg");
+    overflow-x: hidden;
 }
 .gameFrame{
     width: 100vw;
