@@ -14,12 +14,9 @@
     <script defer src="/__/firebase/10.1.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/10.1.0/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/10.1.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.1.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.1.0/firebase-messaging-compat.js"></script>
     <script defer src="/__/firebase/10.1.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.1.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/10.1.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.1.0/firebase-performance-compat.js"></script>
+
     <!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
@@ -45,7 +42,6 @@
   <script>
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "firebase/app";
-    import firebase from "firebase/compat";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -62,25 +58,11 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
 
-    //put data on db
-
-    let highScore = document.getElementById('scoreValue');
-    function getHighScores() {
-      return firebase.database().ref('highScores').orderByChild('score').limitToLast(10).once('value')
-              .then(snapshot => {
-                const highScores = [];
-                snapshot.forEach(childSnapshot => {
-                  highScores.push(childSnapshot.val());
-                });
-                return highScores.reverse();
-              });
-    }
-
-    console.log(getHighScores());
-
   </script>
 
     <script>
+      import firebase from "firebase/compat";
+
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥

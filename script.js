@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 500;
 
+const highScore = localStorage.getItem('score');
+
 let score = 0;
 let gameFrame = 0;
 ctx.font = '40px Georgia';
@@ -170,7 +172,9 @@ function handleSouls() {
                 } else {
                     soulPop2.play();
                 }
-                score++;
+                if(diffLevel === "1" ) score++;
+                if(diffLevel === "2" ) score+=2;
+                if(diffLevel === "3" ) score+=3;
                 soulArray[i].counted = true;
                 soulArray.splice(i, 1);
                 i--;
@@ -276,6 +280,11 @@ function handleGameOver() {
     ctx.fillStyle = 'white';
     ctx.fillText('Game Over, you reached score : ' + score, 110, 250);
     gameOver = true;
+
+    //save high score
+    if(score > highScore){
+        localStorage.setItem('score', score.toString());
+    }
 }
 // Animation loop
 function animate() {
@@ -347,4 +356,7 @@ diffLevel3Btn.addEventListener('click' , function () {
         diffLevel1Btn.classList.remove('btn-info');
     }
 });
+
+const scoreValue = document.getElementById('scoreValue');
+scoreValue.innerText = highScore;
 
